@@ -1,0 +1,125 @@
+:root {
+  font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --bg: #eef4f2;
+  --bg-strong: #dfeae7;
+  --panel: rgba(255, 255, 255, 0.9);
+  --ink: #10232d;
+  --ink-soft: #23414d;
+  --muted: #5d7480;
+  --muted-strong: #46606c;
+  --accent: #24b6a0;
+  --accent-strong: #0b8f88;
+  --accent-warm: #f97316;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at top left, rgba(36, 182, 160, 0.16), transparent 25%),
+    radial-gradient(circle at top right, rgba(249, 115, 22, 0.12), transparent 20%),
+    linear-gradient(180deg, #f6faf8 0%, var(--bg) 48%, var(--bg-strong) 100%);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: var(--accent-strong);
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button {
+  border-radius: 16px;
+  border: 1px solid rgba(56, 92, 106, 0.14);
+  padding: 0.78rem 1rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink-soft);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.92), rgba(236, 244, 242, 0.92));
+  box-shadow:
+    0 10px 24px rgba(16, 35, 45, 0.08),
+    inset 0 1px 0 rgba(255,255,255,0.8);
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  border-color: rgba(11, 143, 136, 0.32);
+  box-shadow:
+    0 14px 32px rgba(16, 35, 45, 0.12),
+    inset 0 1px 0 rgba(255,255,255,0.85);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  transform: none;
+  box-shadow: none;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(36, 182, 160, 0.2);
+  outline-offset: 2px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border-radius: 16px;
+  border: 1px solid rgba(90, 120, 132, 0.22);
+  background: rgba(255,255,255,0.8);
+  color: var(--ink);
+  padding: 0.82rem 0.95rem;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.8);
+}
+
+.leaflet-container {
+  background: #d9ebe4;
+  font-family: inherit;
+}
+
+.leaflet-control-zoom a {
+  border-radius: 14px;
+  border: none;
+  color: var(--ink-soft);
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--ink);
+  backdrop-filter: blur(14px);
+}
