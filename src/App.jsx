@@ -8,6 +8,7 @@ import SimPage from "./ui/SimPage";
 
 import {
   auth,
+  isInAppBrowser,
   signInWithGoogle,
   handleGoogleRedirectResult,
   signupWithEmail,
@@ -129,6 +130,14 @@ export default function App() {
   async function loginWithGoogle() {
     setErr("");
     setInfo("");
+
+    if (isInAppBrowser()) {
+      setErr(
+        "LINE などのアプリ内ブラウザでは Google ログインを使えません。Chrome または Safari でこのページを開いてからお試しください。",
+      );
+      return;
+    }
+
     setAuthBusy(true);
     try {
       await signInWithGoogle();

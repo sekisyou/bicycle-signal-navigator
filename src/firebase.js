@@ -4,10 +4,8 @@ import {
   browserLocalPersistence,
   getAuth,
   GoogleAuthProvider,
-  getRedirectResult,
   setPersistence,
   signInWithPopup,
-  signInWithRedirect,
   signOut,
   sendEmailVerification,
   sendPasswordResetEmail,
@@ -37,25 +35,17 @@ setPersistence(auth, browserLocalPersistence).catch((error) => {
   console.warn("auth persistence setup failed:", error);
 });
 
-function shouldUseRedirectForGoogleSignIn() {
+export function isInAppBrowser() {
   if (typeof navigator === "undefined") return false;
 
   const ua = navigator.userAgent || "";
-  const mobileLike =
-    /Android|iPhone|iPad|iPod/i.test(ua) || Number(navigator.maxTouchPoints) > 1;
-
-  return mobileLike;
+  return /Line|FBAN|FBAV|Instagram/i.test(ua);
 }
 
 /* =========================
    Google Login
 ========================= */
 export async function signInWithGoogle() {
-  if (shouldUseRedirectForGoogleSignIn()) {
-    await signInWithRedirect(auth, googleProvider);
-    return null;
-  }
-
   return signInWithPopup(auth, googleProvider);
 }
 
@@ -101,5 +91,5 @@ export async function logoutFirebase() {
    互換（使ってるから残す）
 ========================= */
 export async function handleGoogleRedirectResult() {
-  return getRedirectResult(auth);
+  return null;
 }
