@@ -204,12 +204,13 @@ function getRouteDataSummary(route) {
 
 function routeButtonStyle(summary) {
   return {
-    padding: "8px 12px",
+    padding: "7px 11px",
     borderRadius: 10,
     border: `1px solid ${summary.border}`,
     background: summary.bg,
     color: summary.color,
     fontWeight: 700,
+    fontSize: 14,
   };
 }
 
@@ -790,7 +791,7 @@ export default function MapPage({ user, onDone }) {
             return (
               <div
                 key={r.id}
-                style={{ display: "flex", gap: 8, flexWrap: "wrap" }}
+                style={{ display: "flex", gap: 6, flexWrap: "wrap" }}
               >
                 <button
                   onClick={() => onOpenRouteForNav(r)}
@@ -802,16 +803,15 @@ export default function MapPage({ user, onDone }) {
                   }`}
                 >
                   {r.name ?? "(no name)"}{" "}
-                  <span style={{ fontSize: 12, opacity: 0.75 }}>
+                  <span style={{ fontSize: 11, opacity: 0.75 }}>
                     {Number.isFinite(r.distM)
                       ? ` - ${Math.round(r.distM)} m`
                       : ""}
                     {r.useTimeSecOfDay != null
                       ? ` / ${secToHHMM(r.useTimeSecOfDay) ?? ""}`
                       : ""}
-                    {` / ${summary.label}`}
                     {summary.avgObs != null
-                      ? ` (${summary.avgObs.toFixed(1)})`
+                      ? ` / ${summary.avgObs.toFixed(1)}`
                       : ""}
                   </span>
                 </button>
@@ -819,10 +819,11 @@ export default function MapPage({ user, onDone }) {
                 <button
                   onClick={() => enterEditFromDoc(r)}
                   style={{
-                    padding: "8px 12px",
+                    padding: "7px 10px",
                     borderRadius: 10,
                     border: "1px solid #ccc",
                     background: "#f7f7f7",
+                    fontSize: 13,
                   }}
                 >
                   編集
@@ -831,10 +832,11 @@ export default function MapPage({ user, onDone }) {
                 <button
                   onClick={() => onDeleteRoute(r)}
                   style={{
-                    padding: "8px 12px",
+                    padding: "7px 10px",
                     borderRadius: 10,
                     border: "1px solid #ccc",
                     background: "#fff0f0",
+                    fontSize: 13,
                   }}
                 >
                   削除
@@ -928,7 +930,7 @@ export default function MapPage({ user, onDone }) {
                   outline: pickTarget === "origin" ? "2px solid #333" : "none",
                 }}
               >
-                出発設定
+                出発
               </button>
               <button
                 onClick={() => setPickTarget("dest")}
@@ -937,9 +939,9 @@ export default function MapPage({ user, onDone }) {
                   outline: pickTarget === "dest" ? "2px solid #333" : "none",
                 }}
               >
-                到着設定
+                到着
               </button>
-              <button onClick={pickCurrentLocation}>現在地で設定</button>
+              <button onClick={pickCurrentLocation}>現在地</button>
             </>
           )}
 
