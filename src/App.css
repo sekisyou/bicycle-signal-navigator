@@ -361,3 +361,98 @@
     border-radius: 24px;
   }
 }
+
+@media (max-width: 640px) {
+  .app-topbar {
+    gap: 10px;
+    padding: 10px 12px 8px;
+  }
+
+  .app-topbar__actions {
+    gap: 8px;
+  }
+
+  .app-info-button {
+    width: 40px;
+    height: 40px;
+    min-height: 40px;
+    font-size: 20px;
+  }
+
+  .app-status-pill {
+    min-height: 36px;
+    padding: 0 12px;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+  }
+
+  .app-action-button {
+    min-height: 38px;
+    padding: 0 14px;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+
+  .app-guide-popover {
+    width: min(320px, calc(100vw - 24px));
+    padding: 14px;
+    border-radius: 18px;
+  }
+
+  .app-guide-popover__title {
+    font-size: 14px;
+  }
+
+  .app-guide-popover__body {
+    gap: 8px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .app-guide-popover__details,
+  .app-guide-popover__more {
+    font-size: 12px;
+  }
+
+  .app-main {
+    padding: 0 10px 10px;
+  }
+
+  .auth-shell {
+    padding: 14px;
+  }
+
+  .auth-card {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .auth-card h2 {
+    font-size: 28px;
+  }
+
+  .auth-card__hint,
+  .auth-message {
+    font-size: 12px;
+  }
+
+  .hud-screen {
+    gap: 10px;
+  }
+
+  .hud-card {
+    border-radius: 20px;
+  }
+
+  .hud-card--compact {
+    padding: 10px 12px;
+  }
+
+  .hud-card--padded {
+    padding: 12px;
+  }
+
+  .hud-map-frame {
+    border-radius: 22px;
+  }
+}

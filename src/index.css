@@ -39,6 +39,10 @@ body {
   margin: 0;
 }
 
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 a {
   color: var(--accent-strong);
   text-decoration: none;
@@ -122,4 +126,24 @@ textarea {
   background: rgba(255, 255, 255, 0.94);
   color: var(--ink);
   backdrop-filter: blur(14px);
+}
+
+@media (max-width: 640px) {
+  html {
+    font-size: 14px;
+  }
+
+  button {
+    border-radius: 14px;
+    padding: 0.68rem 0.88rem;
+    font-size: 0.88rem;
+  }
+
+  input,
+  select,
+  textarea {
+    border-radius: 14px;
+    padding: 0.72rem 0.82rem;
+    font-size: 0.92rem;
+  }
 }
