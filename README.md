@@ -1,16 +1,51 @@
-# React + Vite
+# Bicycle Signal Navigator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+自転車利用者向けの信号予測ナビアプリです。
 
-Currently, two official plugins are available:
+## 概要
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+通学路や通勤路のように、同じルートを繰り返し使う利用者を想定しています。ルート上の信号を記録し、過去の観測から周期を推定して、青信号に合わせやすい走行を支援します。
 
-## React Compiler
+## 主な機能
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- ルート作成と保存
+- 通過地点、信号地点の登録
+- ナビ表示と信号モード
+- 赤停止 / 青通過の観測記録
+- 観測データを使った信号周期予測
+- 推奨速度帯の表示
+- シミュレーション機能
 
-## Expanding the ESLint configuration
+## 技術構成
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React
+- Vite
+- Firebase Authentication
+- Firestore
+- Leaflet / React Leaflet
+- Mapbox Directions API
+
+## 開発用コマンド
+
+```bash
+npm install
+npm run dev
+npm run build
+npm run lint
+```
+
+## 環境変数
+
+`.env.local` に以下を設定します。
+
+- `VITE_FIREBASE_API_KEY`
+- `VITE_FIREBASE_AUTH_DOMAIN`
+- `VITE_FIREBASE_PROJECT_ID`
+- `VITE_FIREBASE_STORAGE_BUCKET`
+- `VITE_FIREBASE_MESSAGING_SENDER_ID`
+- `VITE_FIREBASE_APP_ID`
+- `VITE_MAPBOX_TOKEN`
+
+## ドキュメント
+
+実装ベースの仕様書は [SPECIFICATION.md](/Users/kawase/nav/SPECIFICATION.md) にあります。
