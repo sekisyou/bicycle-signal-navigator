@@ -3,7 +3,9 @@ import { initializeApp } from "firebase/app";
 import {
   getAuth,
   GoogleAuthProvider,
+  getRedirectResult,
   signInWithPopup,
+  signInWithRedirect,
   signOut,
   sendEmailVerification,
   sendPasswordResetEmail,
@@ -28,11 +30,26 @@ export const db = getFirestore(app);
 
 const googleProvider = new GoogleAuthProvider();
 
+function shouldUseRedirectForGoogleSignIn() {
+  if (typeof navigator === "undefined") return false;
+
+  const ua = navigator.userAgent || "";
+  const mobileLike =
+    /Android|iPhone|iPad|iPod/i.test(ua) || Number(navigator.maxTouchPoints) > 1;
+
+  return mobileLike;
+}
+
 /* =========================
    Google Login
 ========================= */
 export async function signInWithGoogle() {
-  await signInWithPopup(auth, googleProvider);
+  if (shouldUseRedirectForGoogleSignIn()) {
+    await signInWithRedirect(auth, googleProvider);
+    return null;
+  }
+
+  return signInWithPopup(auth, googleProvider);
 }
 
 /* =========================
@@ -77,5 +94,5 @@ export async function logoutFirebase() {
    互換（使ってるから残す）
 ========================= */
 export async function handleGoogleRedirectResult() {
-  return null;
+  return getRedirectResult(auth);
 }
