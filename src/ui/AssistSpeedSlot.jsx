@@ -508,7 +508,7 @@ function SegmentText({
       y={p.y + 6}
       textAnchor="middle"
       fill="white"
-      style={{ fontSize: 25 * fontScale, fontWeight: 800 }}
+      style={{ fontSize: 80 * fontScale, fontWeight: 800 }}
     >
       {slot.text}
     </text>
