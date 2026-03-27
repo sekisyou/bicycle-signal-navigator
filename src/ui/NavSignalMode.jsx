@@ -734,13 +734,6 @@ export default function NavSignalMode({
     }, 0);
   };
 
-  const handleSkipSignal = () => {
-    console.log("SIGNALMODE_SKIPPED");
-    finishSignalMode("signalmode-skipped");
-  };
-
-  const modeLabel = isTrafficMode ? "渋滞" : "通常";
-
   const canRender = !!(
     targetSignal &&
     approachRoute &&
@@ -817,9 +810,7 @@ export default function NavSignalMode({
       }}
     >
       <SignalPanel
-        signalName={targetSignal?.name || targetSignal?.id || "signal"}
         speedKmh={observedDisplaySpeedKmh}
-        modeLabel={modeLabel}
         trafficMode={isTrafficMode}
         onToggleTrafficMode={() =>
           setSignalBehaviorMode?.((prev) =>
@@ -833,7 +824,7 @@ export default function NavSignalMode({
         blueEnabled={blueEnabled}
         onRed={handleManualRed}
         onBlue={handleManualBlue}
-        onCancel={handleSkipSignal}
+        onCancel={() => onCancelSignalMode?.("manual-cancel")}
         disabledReason={disabledReason}
       />
 

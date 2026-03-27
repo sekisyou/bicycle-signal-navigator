@@ -641,7 +641,7 @@ function SimControlPanel({
 /* =========================
    Main
 ========================= */
-export default function NavPage({ user, routeId }) {
+export default function NavPage({ user, routeId, onSignalModeChange }) {
   const [route, setRoute] = useState(null);
   const [loading, setLoading] = useState(false);
 
@@ -1368,6 +1368,11 @@ export default function NavPage({ user, routeId }) {
   }, []);
 
   const showAssistSpeedSlot = activeMode === "route" && nextTargetInfo != null;
+
+  useEffect(() => {
+    onSignalModeChange?.(activeMode === "signal");
+    return () => onSignalModeChange?.(false);
+  }, [activeMode, onSignalModeChange]);
 
   return (
     <div

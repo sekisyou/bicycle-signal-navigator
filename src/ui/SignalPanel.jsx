@@ -347,9 +347,7 @@ function DotPersonIcon({
 }
 
 export default function SignalPanel({
-  signalName,
   speedKmh,
-  modeLabel = "通常",
   trafficMode = false,
   onToggleTrafficMode,
 
@@ -453,9 +451,9 @@ export default function SignalPanel({
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "220px 1fr 180px",
-          alignItems: "start",
-          gap: 16,
+          gridTemplateColumns: "minmax(150px, 220px) 1fr minmax(120px, 180px)",
+          alignItems: "center",
+          gap: 14,
         }}
       >
         {/* 左：渋滞モード切替 */}
@@ -470,11 +468,11 @@ export default function SignalPanel({
               background: "rgba(255,255,255,0.74)",
               border: "1px solid rgba(104, 132, 144, 0.18)",
               borderRadius: 18,
-              padding: 12,
+              padding: 10,
               boxShadow: "0 18px 34px rgba(13, 40, 50, 0.08)",
               display: "grid",
-              gap: 8,
-              minWidth: 170,
+              gap: 6,
+              minWidth: 150,
               backdropFilter: "blur(12px)",
             }}
           >
@@ -483,8 +481,6 @@ export default function SignalPanel({
                 fontSize: 11,
                 color: "#58717d",
                 textAlign: "center",
-                letterSpacing: "0.14em",
-                textTransform: "uppercase",
                 fontWeight: 800,
               }}
             >
@@ -494,7 +490,7 @@ export default function SignalPanel({
             <button
               onClick={onToggleTrafficMode}
               style={{
-                padding: "12px 12px",
+                padding: "10px 12px",
                 borderRadius: 14,
                 border: "1px solid rgba(93, 124, 128, 0.18)",
                 background: trafficMode
@@ -515,39 +511,9 @@ export default function SignalPanel({
           style={{
             display: "grid",
             justifyItems: "center",
-            gap: 6,
-            paddingTop: 8,
+            gap: 4,
           }}
         >
-          <div
-            style={{
-              fontSize: 12,
-              color: "#58717d",
-              fontWeight: 800,
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-            }}
-          >
-            Signal Focus
-          </div>
-
-          <div style={{ fontSize: 18, color: "#1c3944", fontWeight: 800 }}>
-            {signalName || "signal"}
-          </div>
-
-          <div
-            style={{
-              fontSize: 12,
-              color: "#44606b",
-              background: "rgba(255,255,255,0.66)",
-              border: "1px solid rgba(104, 132, 144, 0.18)",
-              padding: "6px 10px",
-              borderRadius: 999,
-            }}
-          >
-            モード: {modeLabel}
-          </div>
-
           <div style={{ fontSize: 12, color: "#58717d", letterSpacing: "0.08em" }}>
             現在速度
           </div>
@@ -585,7 +551,7 @@ export default function SignalPanel({
           <button
             onClick={onCancel}
             style={{
-              padding: "12px 18px",
+              padding: "10px 16px",
               borderRadius: 16,
               border: "1px solid rgba(104, 132, 144, 0.18)",
               background: "rgba(255,255,255,0.78)",

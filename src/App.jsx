@@ -56,6 +56,7 @@ export default function App() {
   const [activeRouteId, setActiveRouteId] = useState(null);
   const [showGuide, setShowGuide] = useState(false);
   const [showGuideMore, setShowGuideMore] = useState(false);
+  const [isNavSignalMode, setIsNavSignalMode] = useState(false);
 
   useEffect(() => {
     handleGoogleRedirectResult()
@@ -271,163 +272,167 @@ export default function App() {
     );
   }
 
+  const showTopbar = !(page === "nav" && isNavSignalMode);
+
   return (
     <div className="app-shell">
-      <div className="app-topbar">
-        <div className="app-topbar__actions">
-          {(page === "map" || page === "nav") && (
-            <div className="app-guide-anchor">
-              <button
-                aria-label={
-                  page === "map"
-                    ? "道順登録の使い方を表示"
-                    : "ナビ画面の使い方を表示"
-                }
-                className="app-info-button"
-                onClick={() => {
-                  setShowGuide((v) => {
-                    const next = !v;
-                    if (!next) setShowGuideMore(false);
-                    return next;
-                  });
-                }}
-                type="button"
-              >
-                i
-              </button>
+      {showTopbar && (
+        <div className="app-topbar">
+          <div className="app-topbar__actions">
+            {(page === "map" || page === "nav") && (
+              <div className="app-guide-anchor">
+                <button
+                  aria-label={
+                    page === "map"
+                      ? "道順登録の使い方を表示"
+                      : "ナビ画面の使い方を表示"
+                  }
+                  className="app-info-button"
+                  onClick={() => {
+                    setShowGuide((v) => {
+                      const next = !v;
+                      if (!next) setShowGuideMore(false);
+                      return next;
+                    });
+                  }}
+                  type="button"
+                >
+                  i
+                </button>
 
-              {showGuide && (
-                <div className="app-guide-popover">
-                  <div className="app-guide-popover__header">
-                    <div className="app-guide-popover__title">
-                      {page === "map"
-                        ? "道順登録の使い方"
-                        : "ナビ画面の使い方"}
-                    </div>
-                    <button
-                      aria-label="閉じる"
-                      className="app-guide-popover__close"
-                      onClick={() => {
-                        setShowGuide(false);
-                        setShowGuideMore(false);
-                      }}
-                      type="button"
-                    >
-                      ×
-                    </button>
-                  </div>
-
-                  <div className="app-guide-popover__body">
-                    {page === "map" ? (
-                      <>
-                        <div>1. 出発地点と到着地点を選びます</div>
-                        <div>2. 必要なら通過地点を追加します</div>
-                        <div>3. 信号モードで信号を追加します</div>
-                        <div>4. よく使う出発時刻を登録します</div>
-                        <div>
-                          5. 登録した時刻の前後1時間の観測を、予測に利用します
-                        </div>
-                        <div>6. ルート名を付けて保存します</div>
-                        <div>7. 保存後は編集やナビ開始ができます</div>
-                        <div>
-                          8. 保存したルートには使用回数が表示され、回数によって色が変わります
-                        </div>
-                        <div>9. 何度も使うことで、予測精度が高くなります</div>
-                      </>
-                    ) : (
-                      <>
-                        <div>
-                          1. 現在の速度で進んだ場合の信号の色を表示します
-                        </div>
-                        <div>
-                          2. 信号に近づくと、自動で信号モードに切り替わります
-                        </div>
-                        <div>
-                          3. 赤や青の観測は自動でも手動でも記録できます
-                        </div>
-                        <div>
-                          4. 自動検出は、自転車らしい動きをするほど正確になりやすくなります
-                        </div>
-                        <div>
-                          5. 信号モードでは、実際の信号と同じ色を選んでください
-                        </div>
-                        <div>
-                          6. 渋滞などで進みにくい場合は、渋滞モードを選んでください。このモードでは信号の自動検出はオフになります
-                        </div>
-                        <div>
-                          7. 信号を飛ばすときはスキップ、信号モードをやめるときはキャンセルを押してください
-                        </div>
-                        <div>補足: 道順を外れた場合は再ルートされます</div>
-                      </>
-                    )}
-
-                    <button
-                      className="app-guide-popover__more"
-                      onClick={() => setShowGuideMore((v) => !v)}
-                      type="button"
-                    >
-                      {showGuideMore ? "閉じる" : "もっと見る"}
-                    </button>
-
-                    {showGuideMore && (
-                      <div className="app-guide-popover__details">
-                        {page === "map" ? (
-                          <>
-                            <div>1. 編集中の変更は、保存するまで確定されません</div>
-                            <div>
-                              2. 編集を終了して破棄すると、変更前の内容に戻ります
-                            </div>
-                            <div>
-                              3. 信号を削除すると、その信号の観測データも失われます
-                            </div>
-                            <div>
-                              4. 信号はルートの近くに追加してください。離れた信号は保存されません
-                            </div>
-                            <div>
-                              5. 通過地点や信号を追加・移動すると、ルートが再計算されます
-                            </div>
-                            <div>6. 同じ名前のルートは保存できません</div>
-                          </>
-                        ) : (
-                          <>
-                            <div>
-                              1. 青で通過したあとや、赤のあとに青を記録したあとは、自動で通常のナビ画面に戻ります
-                            </div>
-                            <div>
-                              2. 信号に近づいて減速・停止すると、赤が自動で記録されやすくなります
-                            </div>
-                            <div>
-                              3. 赤を記録したあとに発進すると、青への切り替わりも自動で記録されることがあります
-                            </div>
-                            <div>
-                              4. 低速で通過した場合は、通常のナビ画面へ戻るまで少し時間がかかることがあります
-                            </div>
-                            <div>
-                              5. 信号を通り過ぎて十分離れると、自動で信号モードを終了することがあります
-                            </div>
-                          </>
-                        )}
+                {showGuide && (
+                  <div className="app-guide-popover">
+                    <div className="app-guide-popover__header">
+                      <div className="app-guide-popover__title">
+                        {page === "map"
+                          ? "道順登録の使い方"
+                          : "ナビ画面の使い方"}
                       </div>
-                    )}
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
+                      <button
+                        aria-label="閉じる"
+                        className="app-guide-popover__close"
+                        onClick={() => {
+                          setShowGuide(false);
+                          setShowGuideMore(false);
+                        }}
+                        type="button"
+                      >
+                        ×
+                      </button>
+                    </div>
 
-          <div className="app-status-pill">
-            {page === "map" ? "Route Studio" : page === "nav" ? "Live Nav" : "Sim Mode"}
-          </div>
-          {page !== "map" && (
-            <button className="app-action-button app-action-button--map" onClick={() => setPage("map")}>
-              Map
+                    <div className="app-guide-popover__body">
+                      {page === "map" ? (
+                        <>
+                          <div>1. 出発地点と到着地点を選びます</div>
+                          <div>2. 必要なら通過地点を追加します</div>
+                          <div>3. 信号モードで信号を追加します</div>
+                          <div>4. よく使う出発時刻を登録します</div>
+                          <div>
+                            5. 登録した時刻の前後1時間の観測を、予測に利用します
+                          </div>
+                          <div>6. ルート名を付けて保存します</div>
+                          <div>7. 保存後は編集やナビ開始ができます</div>
+                          <div>
+                            8. 保存したルートには使用回数が表示され、回数によって色が変わります
+                          </div>
+                          <div>9. 何度も使うことで、予測精度が高くなります</div>
+                        </>
+                      ) : (
+                        <>
+                          <div>
+                            1. 現在の速度で進んだ場合の信号の色を表示します
+                          </div>
+                          <div>
+                            2. 信号に近づくと、自動で信号モードに切り替わります
+                          </div>
+                          <div>
+                            3. 赤や青の観測は自動でも手動でも記録できます
+                          </div>
+                          <div>
+                            4. 自動検出は、自転車らしい動きをするほど正確になりやすくなります
+                          </div>
+                          <div>
+                            5. 信号モードでは、実際の信号と同じ色を選んでください
+                          </div>
+                          <div>
+                            6. 渋滞などで進みにくい場合は、渋滞モードを選んでください。このモードでは信号の自動検出はオフになります
+                          </div>
+                          <div>
+                            7. 信号を飛ばすときはスキップ、信号モードをやめるときはキャンセルを押してください
+                          </div>
+                          <div>補足: 道順を外れた場合は再ルートされます</div>
+                        </>
+                      )}
+
+                      <button
+                        className="app-guide-popover__more"
+                        onClick={() => setShowGuideMore((v) => !v)}
+                        type="button"
+                      >
+                        {showGuideMore ? "閉じる" : "もっと見る"}
+                      </button>
+
+                      {showGuideMore && (
+                        <div className="app-guide-popover__details">
+                          {page === "map" ? (
+                            <>
+                              <div>1. 編集中の変更は、保存するまで確定されません</div>
+                              <div>
+                                2. 編集を終了して破棄すると、変更前の内容に戻ります
+                              </div>
+                              <div>
+                                3. 信号を削除すると、その信号の観測データも失われます
+                              </div>
+                              <div>
+                                4. 信号はルートの近くに追加してください。離れた信号は保存されません
+                              </div>
+                              <div>
+                                5. 通過地点や信号を追加・移動すると、ルートが再計算されます
+                              </div>
+                              <div>6. 同じ名前のルートは保存できません</div>
+                            </>
+                          ) : (
+                            <>
+                              <div>
+                                1. 青で通過したあとや、赤のあとに青を記録したあとは、自動で通常のナビ画面に戻ります
+                              </div>
+                              <div>
+                                2. 信号に近づいて減速・停止すると、赤が自動で記録されやすくなります
+                              </div>
+                              <div>
+                                3. 赤を記録したあとに発進すると、青への切り替わりも自動で記録されることがあります
+                              </div>
+                              <div>
+                                4. 低速で通過した場合は、通常のナビ画面へ戻るまで少し時間がかかることがあります
+                              </div>
+                              <div>
+                                5. 信号を通り過ぎて十分離れると、自動で信号モードを終了することがあります
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+
+            <div className="app-status-pill">
+              {page === "map" ? "Route Studio" : page === "nav" ? "Live Nav" : "Sim Mode"}
+            </div>
+            {page !== "map" && (
+              <button className="app-action-button app-action-button--map" onClick={() => setPage("map")}>
+                Map
+              </button>
+            )}
+            <button className="app-action-button app-action-button--logout" onClick={logout}>
+              ログアウト
             </button>
-          )}
-          <button className="app-action-button app-action-button--logout" onClick={logout}>
-            ログアウト
-          </button>
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="app-main">
         {page === "map" && (
@@ -452,6 +457,7 @@ export default function App() {
           <NavPage
             user={user}
             routeId={activeRouteId}
+            onSignalModeChange={setIsNavSignalMode}
             onDone={({ mode } = {}) => {
               if (mode === "back") setPage("map");
             }}
