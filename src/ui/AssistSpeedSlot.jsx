@@ -511,7 +511,7 @@ function SegmentText({
         </text>
         <text
           x={p.x}
-          y={p.y + 34}
+          y={p.y + 39}
           textAnchor="middle"
           fill="white"
           style={{ fontSize: 30 * fontScale, fontWeight: 700 }}
