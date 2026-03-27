@@ -794,16 +794,16 @@ export default function AssistSpeedSlot({
     );
   }
 
-  const scale = 0.32;
+  const scale = 0.72;
 
   const W = 1020;
-  const H = 108;
+  const H = 148;
   const cx = W / 2;
-  const cy = 162;
-  const outerRx = 420;
-  const outerRy = 150;
-  const innerRx = 255;
-  const innerRy = 68;
+  const cy = 136;
+  const outerRx = 330;
+  const outerRy = 118;
+  const innerRx = 210;
+  const innerRy = 56;
 
   const slotFracs = buildSlotGeometry(meter.mode);
   const boundaryValues = uniqueFinite(meter.boundaryValues);
@@ -859,11 +859,11 @@ export default function AssistSpeedSlot({
                 cy,
                 outerRx,
                 outerRy,
-                padRx: 14,
-                padRy: 10,
+                padRx: 18,
+                padRy: 12,
                 startFrac: 0.62,
                 endFrac: 0.9,
-                topY: 4,
+                topY: 6,
               });
 
               return (
@@ -889,7 +889,7 @@ export default function AssistSpeedSlot({
                     dominantBaseline="middle"
                     fill="#111"
                     style={{
-                      fontSize: 8,
+                      fontSize: 14,
                       fontWeight: 800,
                       cursor: "pointer",
                       pointerEvents: "auto",
@@ -913,7 +913,7 @@ export default function AssistSpeedSlot({
             left: 10,
             top: 0,
             zIndex: 8,
-            fontSize: 8,
+            fontSize: 10,
             color: "#666",
           }}
         >
@@ -926,7 +926,7 @@ export default function AssistSpeedSlot({
           position: "relative",
           width: "100%",
           maxWidth: 1080,
-          height: 56,
+          height: 116,
           margin: "0 auto",
           overflow: "hidden",
         }}
@@ -1096,17 +1096,17 @@ export default function AssistSpeedSlot({
           style={{
             position: "absolute",
             left: "50%",
-            top: 36,
+            top: 72,
             transform: "translateX(-50%)",
             zIndex: 7,
             textAlign: "center",
-            minWidth: 88,
+            minWidth: 170,
             pointerEvents: "none",
           }}
         >
           <div
             style={{
-              fontSize: 8,
+              fontSize: 16,
               fontWeight: 900,
               color: "#222",
               lineHeight: 1.05,
@@ -1116,8 +1116,8 @@ export default function AssistSpeedSlot({
           </div>
           <div
             style={{
-              marginTop: 2,
-              fontSize: 7,
+              marginTop: 4,
+              fontSize: 14,
               fontWeight: 700,
               color: "#555",
             }}
