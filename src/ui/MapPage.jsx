@@ -799,7 +799,16 @@ export default function MapPage({ user, onDone }) {
 
         <div
           className="saved-routes-scroll"
-          style={{ marginTop: 10, display: "grid", gap: 8 }}
+          style={{
+            marginTop: 10,
+            display: "grid",
+            gap: 8,
+            maxHeight: sortedSavedRoutes.length > 3 ? 220 : undefined,
+            overflowY: sortedSavedRoutes.length > 3 ? "auto" : "visible",
+            WebkitOverflowScrolling:
+              sortedSavedRoutes.length > 3 ? "touch" : undefined,
+            paddingRight: sortedSavedRoutes.length > 3 ? 4 : 0,
+          }}
         >
           {sortedSavedRoutes.map((r) => {
             const summary = getRouteDataSummary(r);
