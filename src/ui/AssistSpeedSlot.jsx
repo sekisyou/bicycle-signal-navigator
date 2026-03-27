@@ -865,7 +865,7 @@ export default function AssistSpeedSlot({
                 padRy: 14,
                 startFrac: 0.62,
                 endFrac: 0.9,
-                topY: -45,
+                topY: -50,
               });
 
               return (
@@ -885,8 +885,8 @@ export default function AssistSpeedSlot({
                     onClick={onSkipSignal}
                   />
                   <text
-                    x={870}
-                    y={0}
+                    x={855}
+                    y={-15}
                     textAnchor="middle"
                     dominantBaseline="middle"
                     fill="#111"
