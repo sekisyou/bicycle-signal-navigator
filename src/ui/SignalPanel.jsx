@@ -451,7 +451,7 @@ export default function SignalPanel({
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "minmax(150px, 220px) 1fr minmax(120px, 180px)",
+          gridTemplateColumns: "140px 1fr 140px",
           alignItems: "center",
           gap: 14,
         }}
@@ -460,12 +460,12 @@ export default function SignalPanel({
         <div
           style={{
             display: "flex",
-            justifyContent: "flex-start",
+            justifyContent: "center",
           }}
         >
           <div
             style={{
-              minWidth: 150,
+              width: "100%",
             }}
           >
             <button
@@ -482,6 +482,7 @@ export default function SignalPanel({
                 whiteSpace: "nowrap",
                 boxShadow: "0 18px 34px rgba(13, 40, 50, 0.08)",
                 backdropFilter: "blur(12px)",
+                width: "100%",
               }}
             >
               {trafficMode ? "渋滞" : "通常"}
@@ -509,6 +510,16 @@ export default function SignalPanel({
             }}
           >
             {speedText}
+            <span
+              style={{
+                fontSize: 18,
+                fontWeight: 700,
+                marginLeft: 6,
+                color: "#47626d",
+              }}
+            >
+              km/h
+            </span>
           </div>
         </div>
 
@@ -516,7 +527,7 @@ export default function SignalPanel({
         <div
           style={{
             display: "flex",
-            justifyContent: "flex-end",
+            justifyContent: "center",
           }}
         >
           <button
@@ -533,6 +544,7 @@ export default function SignalPanel({
               whiteSpace: "nowrap",
               boxShadow: "0 18px 34px rgba(13, 40, 50, 0.08)",
               backdropFilter: "blur(12px)",
+              width: "100%",
             }}
           >
             キャンセル
