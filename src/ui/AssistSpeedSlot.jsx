@@ -799,11 +799,11 @@ export default function AssistSpeedSlot({
   const W = 1020;
   const H = 172;
   const cx = W / 2;
-  const cy = 162;
+  const cy = 176;
   const outerRx = 420;
-  const outerRy = 150;
+  const outerRy = 170;
   const innerRx = 255;
-  const innerRy = 68;
+  const innerRy = 78;
 
   const slotFracs = buildSlotGeometry(meter.mode);
   const boundaryValues = uniqueFinite(meter.boundaryValues);
@@ -923,14 +923,14 @@ export default function AssistSpeedSlot({
       )}
 
       <div
-          style={{
-            position: "relative",
-            width: "95%",
-            maxWidth: 980,
-            height: 150,
-            margin: "0 auto",
-            overflow: "hidden",
-          }}
+        style={{
+          position: "relative",
+          width: "98%",
+          maxWidth: 1000,
+          height: 164,
+          margin: "0 auto",
+          overflow: "hidden",
+        }}
         >
         <div
           ref={stripRef}
@@ -1098,7 +1098,7 @@ export default function AssistSpeedSlot({
           style={{
             position: "absolute",
             left: "50%",
-            top: 94,
+            top: 106,
             transform: "translateX(-50%)",
             zIndex: 7,
             textAlign: "center",
