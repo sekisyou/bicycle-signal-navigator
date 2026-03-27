@@ -212,7 +212,7 @@ function buildMeterModel(ranges, currentSpeedKmh) {
         },
         {
           role: "slot1",
-          kind: centerBlue ? "blue" : "gray",
+          kind: centerBlue ? "red" : "gray",
           band: centerBlue,
           text: centerBlue ? fmt1(bandMin(centerBlue)) : "",
           current: false,
@@ -230,7 +230,7 @@ function buildMeterModel(ranges, currentSpeedKmh) {
         },
         {
           role: "slot3",
-          kind: centerBlue ? "blue" : "gray",
+          kind: centerBlue ? "red" : "gray",
           band: centerBlue,
           text: centerBlue ? fmt1(bandMax(centerBlue)) : "",
           current: false,
@@ -265,8 +265,8 @@ function buildMeterModel(ranges, currentSpeedKmh) {
       slots: [
         {
           role: "slot0",
-          kind: "gray",
-          band: null,
+          kind: leftBlue ? "blue" : "gray",
+          band: leftBlue,
           text: "",
           current: false,
           subtleDividerRight: false,
@@ -301,8 +301,8 @@ function buildMeterModel(ranges, currentSpeedKmh) {
         },
         {
           role: "slot4",
-          kind: "gray",
-          band: null,
+          kind: rightBlue ? "blue" : "gray",
+          band: rightBlue,
           text: "",
           current: false,
           subtleDividerRight: false,
