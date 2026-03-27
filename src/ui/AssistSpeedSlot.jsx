@@ -89,6 +89,7 @@ function buildSkipWedgePath({
 
   return `
     M ${a.x} ${a.y}
+    L ${a.x} ${topY}
     L ${rightX - r} ${topY}
     Q ${rightX} ${topY} ${rightX} ${topY + r}
     L ${rightX} ${b.y}
