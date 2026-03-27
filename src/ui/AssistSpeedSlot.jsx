@@ -846,7 +846,7 @@ export default function AssistSpeedSlot({
               position: "absolute",
               left: "50%",
               top: 0,
-              width: "90%",
+              width: "95%",
               maxWidth: W,
               height: H,
               transform: "translateX(-50%)",
@@ -925,8 +925,8 @@ export default function AssistSpeedSlot({
       <div
         style={{
           position: "relative",
-          width: "90%",
-          maxWidth: 920,
+          width: "95%",
+          maxWidth: 980,
           height: 150,
           margin: "0 auto",
           overflow: "hidden",
