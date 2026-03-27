@@ -846,7 +846,7 @@ export default function AssistSpeedSlot({
               position: "absolute",
               left: "50%",
               top: 0,
-              width: "95%",
+              width: "108%",
               maxWidth: W,
               height: H,
               transform: "translateX(-50%)",
@@ -923,23 +923,25 @@ export default function AssistSpeedSlot({
       )}
 
       <div
-        style={{
-          position: "relative",
-          width: "95%",
-          maxWidth: 980,
-          height: 150,
-          margin: "0 auto",
-          overflow: "hidden",
-        }}
-      >
+          style={{
+            position: "relative",
+            width: "95%",
+            maxWidth: 980,
+            height: 150,
+            margin: "0 auto",
+            overflow: "hidden",
+          }}
+        >
         <div
           ref={stripRef}
           style={{
             position: "absolute",
-            left: 0,
+            left: "50%",
             top: 0,
-            width: "100%",
+            width: "108%",
+            maxWidth: W,
             height: H,
+            transform: "translateX(-50%)",
             zIndex: 1,
           }}
         >
