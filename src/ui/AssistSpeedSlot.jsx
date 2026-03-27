@@ -514,7 +514,7 @@ function SegmentText({
           y={p.y + 34}
           textAnchor="middle"
           fill="white"
-          style={{ fontSize: 15 * fontScale, fontWeight: 700 }}
+          style={{ fontSize: 30 * fontScale, fontWeight: 700 }}
         >
           km/h
         </text>
