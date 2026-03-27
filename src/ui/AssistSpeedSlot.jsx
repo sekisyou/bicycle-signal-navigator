@@ -171,11 +171,11 @@ function buildMeterModel(ranges, currentSpeedKmh) {
         role: `slot${i}`,
         kind: "gray",
         band: null,
+        text: "",
         current: i === 2,
         subtleDividerRight: false,
         showText: false,
       })),
-      boundaryValues: [],
     };
   }
 
@@ -194,9 +194,7 @@ function buildMeterModel(ranges, currentSpeedKmh) {
 
   if (currentBlueIndex >= 0) {
     const leftBlue = blueBands[currentBlueIndex - 1]?.band ?? null;
-    const leftRed = gaps[currentBlueIndex - 1]?.band ?? null;
     const centerBlue = blueBands[currentBlueIndex]?.band ?? null;
-    const rightRed = gaps[currentBlueIndex]?.band ?? null;
     const rightBlue = blueBands[currentBlueIndex + 1]?.band ?? null;
 
     return {
@@ -207,50 +205,47 @@ function buildMeterModel(ranges, currentSpeedKmh) {
           role: "slot0",
           kind: leftBlue ? "blue" : "gray",
           band: leftBlue,
+          text: leftBlue ? fmt1(bandMin(leftBlue)) : "",
           current: false,
           subtleDividerRight: false,
-          showText: false,
+          showText: !!leftBlue,
         },
         {
           role: "slot1",
-          kind: leftRed ? "red" : "gray",
-          band: leftRed,
+          kind: centerBlue ? "blue" : "gray",
+          band: centerBlue,
+          text: centerBlue ? fmt1(bandMin(centerBlue)) : "",
           current: false,
           subtleDividerRight: false,
-          showText: false,
+          showText: !!centerBlue,
         },
         {
           role: "slot2",
           kind: centerBlue ? "blue" : "gray",
           band: centerBlue,
+          text: "",
           current: true,
           subtleDividerRight: false,
           showText: false,
         },
         {
           role: "slot3",
-          kind: rightRed ? "red" : "gray",
-          band: rightRed,
+          kind: centerBlue ? "blue" : "gray",
+          band: centerBlue,
+          text: centerBlue ? fmt1(bandMax(centerBlue)) : "",
           current: false,
           subtleDividerRight: false,
-          showText: false,
+          showText: !!centerBlue,
         },
         {
           role: "slot4",
           kind: rightBlue ? "blue" : "gray",
           band: rightBlue,
+          text: rightBlue ? fmt1(bandMax(rightBlue)) : "",
           current: false,
           subtleDividerRight: false,
-          showText: false,
+          showText: !!rightBlue,
         },
-      ],
-      boundaryValues: [
-        leftBlue ? bandMin(leftBlue) : null,
-        leftBlue ? bandMax(leftBlue) : null,
-        leftRed ? bandMax(leftRed) : null,
-        centerBlue ? bandMax(centerBlue) : null,
-        rightRed ? bandMax(rightRed) : null,
-        rightBlue ? bandMax(rightBlue) : null,
       ],
     };
   }
@@ -270,24 +265,27 @@ function buildMeterModel(ranges, currentSpeedKmh) {
       slots: [
         {
           role: "slot0",
-          kind: leftBlue ? "blue" : "gray",
-          band: leftBlue,
+          kind: "gray",
+          band: null,
+          text: "",
           current: false,
-          subtleDividerRight: true,
+          subtleDividerRight: false,
           showText: false,
         },
         {
           role: "slot1",
           kind: leftBlue ? "blue" : "gray",
           band: leftBlue,
+          text: leftBlue ? fmt1(bandMin(leftBlue)) : "",
           current: false,
           subtleDividerRight: false,
-          showText: false,
+          showText: !!leftBlue,
         },
         {
           role: "slot2",
           kind: centerRed ? "red" : "gray",
           band: centerRed,
+          text: "",
           current: true,
           subtleDividerRight: false,
           showText: false,
@@ -296,30 +294,20 @@ function buildMeterModel(ranges, currentSpeedKmh) {
           role: "slot3",
           kind: rightBlue ? "blue" : "gray",
           band: rightBlue,
+          text: rightBlue ? fmt1(bandMax(rightBlue)) : "",
           current: false,
-          subtleDividerRight: true,
-          showText: false,
+          subtleDividerRight: false,
+          showText: !!rightBlue,
         },
         {
           role: "slot4",
-          kind: rightBlue ? "blue" : "gray",
-          band: rightBlue,
+          kind: "gray",
+          band: null,
+          text: "",
           current: false,
           subtleDividerRight: false,
           showText: false,
         },
-      ],
-      leftBlueLabel: leftBlue
-        ? `${fmt1(bandMin(leftBlue))} 〜 ${fmt1(bandMax(leftBlue))}`
-        : "",
-      rightBlueLabel: rightBlue
-        ? `${fmt1(bandMin(rightBlue))} 〜 ${fmt1(bandMax(rightBlue))}`
-        : "",
-      boundaryValues: [
-        leftBlue ? bandMin(leftBlue) : null,
-        leftBlue ? bandMax(leftBlue) : null,
-        centerRed ? bandMax(centerRed) : null,
-        rightBlue ? bandMax(rightBlue) : null,
       ],
     };
   }
@@ -337,22 +325,25 @@ function buildMeterModel(ranges, currentSpeedKmh) {
           role: "slot0",
           kind: "gray",
           band: null,
-          current: false,
-          subtleDividerRight: true,
-          showText: false,
-        },
-        {
-          role: "slot1",
-          kind: "gray",
-          band: null,
+          text: "",
           current: false,
           subtleDividerRight: false,
           showText: false,
         },
         {
+          role: "slot1",
+          kind: "blue",
+          band: slowest,
+          text: slowest ? fmt1(bandMin(slowest)) : "",
+          current: false,
+          subtleDividerRight: false,
+          showText: !!slowest,
+        },
+        {
           role: "slot2",
           kind: "red",
           band: { low: 0, high: bandMin(slowest) },
+          text: "",
           current: true,
           subtleDividerRight: false,
           showText: false,
@@ -361,28 +352,20 @@ function buildMeterModel(ranges, currentSpeedKmh) {
           role: "slot3",
           kind: "blue",
           band: slowest,
+          text: slowest ? fmt1(bandMax(slowest)) : "",
           current: false,
-          subtleDividerRight: true,
-          showText: false,
+          subtleDividerRight: false,
+          showText: !!slowest,
         },
         {
           role: "slot4",
-          kind: "blue",
-          band: slowest,
+          kind: "gray",
+          band: null,
+          text: "",
           current: false,
           subtleDividerRight: false,
           showText: false,
         },
-      ],
-      leftBlueLabel: "",
-      rightBlueLabel: slowest
-        ? `${fmt1(bandMin(slowest))} 〜 ${fmt1(bandMax(slowest))}`
-        : "",
-      boundaryValues: [
-        null,
-        null,
-        slowest ? bandMin(slowest) : null,
-        slowest ? bandMax(slowest) : null,
       ],
     };
   }
@@ -394,54 +377,49 @@ function buildMeterModel(ranges, currentSpeedKmh) {
       slots: [
         {
           role: "slot0",
-          kind: "blue",
-          band: fastest,
+          kind: "gray",
+          band: null,
+          text: "",
           current: false,
-          subtleDividerRight: true,
+          subtleDividerRight: false,
           showText: false,
         },
         {
           role: "slot1",
           kind: "blue",
           band: fastest,
+          text: fastest ? fmt1(bandMin(fastest)) : "",
           current: false,
           subtleDividerRight: false,
-          showText: false,
+          showText: !!fastest,
         },
         {
           role: "slot2",
           kind: "red",
           band: { low: bandMax(fastest), high: bandMax(fastest) + 1 },
+          text: "",
           current: true,
           subtleDividerRight: false,
           showText: false,
         },
         {
           role: "slot3",
-          kind: "gray",
-          band: null,
+          kind: "blue",
+          band: fastest,
+          text: fastest ? fmt1(bandMax(fastest)) : "",
           current: false,
-          subtleDividerRight: true,
-          showText: false,
+          subtleDividerRight: false,
+          showText: !!fastest,
         },
         {
           role: "slot4",
           kind: "gray",
           band: null,
+          text: "",
           current: false,
           subtleDividerRight: false,
           showText: false,
         },
-      ],
-      leftBlueLabel: fastest
-        ? `${fmt1(bandMin(fastest))} 〜 ${fmt1(bandMax(fastest))}`
-        : "",
-      rightBlueLabel: "",
-      boundaryValues: [
-        fastest ? bandMin(fastest) : null,
-        fastest ? bandMax(fastest) : null,
-        null,
-        null,
       ],
     };
   }
@@ -453,11 +431,11 @@ function buildMeterModel(ranges, currentSpeedKmh) {
       role: `slot${i}`,
       kind: "gray",
       band: null,
+      text: "",
       current: i === 2,
       subtleDividerRight: false,
       showText: false,
     })),
-    boundaryValues: [],
   };
 }
 
@@ -524,46 +502,16 @@ function SegmentText({
 
   if (slot.kind === "gray" || !slot.band || !slot.showText) return null;
 
-  const leftValue = bandMin(slot.band);
-  const rightValue = bandMax(slot.band);
-
   return (
     <text
       x={p.x}
       y={p.y + 6}
       textAnchor="middle"
       fill="white"
-      style={{ fontSize: 17 * fontScale, fontWeight: 800 }}
+      style={{ fontSize: 25 * fontScale, fontWeight: 800 }}
     >
-      {fmt1(leftValue)} 〜 {fmt1(rightValue)}
+      {slot.text}
     </text>
-  );
-}
-
-function BoundaryLabel({ value, left, top, scale = 1 }) {
-  return (
-    <div
-      style={{
-        position: "absolute",
-        left,
-        top,
-        transform: "translate(-50%, -50%)",
-        minWidth: 54 * scale,
-        padding: `${4 * scale}px ${8 * scale}px`,
-        borderRadius: 12 * scale,
-        background: "white",
-        border: "2px solid rgba(0,0,0,0.25)",
-        fontSize: 14 * scale,
-        fontWeight: 800,
-        textAlign: "center",
-        boxShadow: "0 3px 8px rgba(0,0,0,0.08)",
-        zIndex: 6,
-        pointerEvents: "none",
-        whiteSpace: "nowrap",
-      }}
-    >
-      {fmt1(value)}
-    </div>
   );
 }
 
@@ -807,19 +755,6 @@ export default function AssistSpeedSlot({
   const innerRy = 170;
 
   const slotFracs = buildSlotGeometry(meter.mode);
-  const boundaryValues = uniqueFinite(meter.boundaryValues);
-
-  const boundaryFracs =
-    meter.mode === "blue"
-      ? [0.04, 0.2, 0.36, 0.64, 0.8, 0.96]
-      : [0.04, 0.4, 0.6, 0.96];
-
-  const leftBluePairFrac = { start: slotFracs[0].start, end: slotFracs[1].end };
-  const rightBluePairFrac = {
-    start: slotFracs[3].start,
-    end: slotFracs[4].end,
-  };
-
   return (
     <div
       style={{
@@ -1016,84 +951,25 @@ export default function AssistSpeedSlot({
                       fontScale={scale}
                     />
                   )}
+                  {meter.mode === "red" && (
+                    <SegmentText
+                      cx={cx}
+                      cy={cy}
+                      outerRx={outerRx}
+                      outerRy={outerRy}
+                      innerRx={innerRx}
+                      innerRy={innerRy}
+                      frac={frac}
+                      slot={slot}
+                      speed={safeSpeed}
+                      fontScale={scale}
+                    />
+                  )}
                 </g>
               );
             })}
-
-            {meter.mode === "red" && (
-              <>
-                <SegmentText
-                  cx={cx}
-                  cy={cy}
-                  outerRx={outerRx}
-                  outerRy={outerRy}
-                  innerRx={innerRx}
-                  innerRy={innerRy}
-                  frac={leftBluePairFrac}
-                  slot={{
-                    kind: meter.slots[0].kind,
-                    band: meter.slots[0].band,
-                    current: false,
-                    showText: meter.slots[0].kind !== "gray",
-                  }}
-                  speed={safeSpeed}
-                  fontScale={scale}
-                />
-                <SegmentText
-                  cx={cx}
-                  cy={cy}
-                  outerRx={outerRx}
-                  outerRy={outerRy}
-                  innerRx={innerRx}
-                  innerRy={innerRy}
-                  frac={slotFracs[2]}
-                  slot={{
-                    kind: meter.slots[2].kind,
-                    band: meter.slots[2].band,
-                    current: true,
-                    showText: false,
-                  }}
-                  speed={safeSpeed}
-                  fontScale={scale}
-                />
-                <SegmentText
-                  cx={cx}
-                  cy={cy}
-                  outerRx={outerRx}
-                  outerRy={outerRy}
-                  innerRx={innerRx}
-                  innerRy={innerRy}
-                  frac={rightBluePairFrac}
-                  slot={{
-                    kind: meter.slots[4].kind,
-                    band: meter.slots[4].band,
-                    current: false,
-                    showText: meter.slots[4].kind !== "gray",
-                  }}
-                  speed={safeSpeed}
-                  fontScale={scale}
-                />
-              </>
-            )}
           </svg>
         </div>
-
-        {boundaryValues.map((value, i) => {
-          if (i >= boundaryFracs.length) return null;
-          const labelRx = (outerRx + innerRx) / 2;
-          const labelRy = (outerRy + innerRy) / 2;
-
-          const p = pointOnEllipse(cx, cy, labelRx, labelRy, boundaryFracs[i]);
-          return (
-            <BoundaryLabel
-              key={`${value}-${i}`}
-              value={value}
-              left={`calc(50% + ${p.x - W / 2}px)`}
-              top={`${p.y}px`}
-              scale={scale}
-            />
-          );
-        })}
 
         <div
           style={{
