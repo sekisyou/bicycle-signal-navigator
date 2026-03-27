@@ -356,6 +356,19 @@ export default function MapPage({ user, onDone }) {
   const [savedRoutes, setSavedRoutes] = useState([]);
   const [loadingRoutes, setLoadingRoutes] = useState(false);
 
+  const sortedSavedRoutes = useMemo(() => {
+    return [...(savedRoutes || [])].sort((a, b) => {
+      const aAvg = getRouteDataSummary(a).avgObs ?? -1;
+      const bAvg = getRouteDataSummary(b).avgObs ?? -1;
+
+      if (bAvg !== aAvg) return bAvg - aAvg;
+
+      const aName = String(a?.name ?? "");
+      const bName = String(b?.name ?? "");
+      return aName.localeCompare(bName, "ja");
+    });
+  }, [savedRoutes]);
+
   // block click once
   const blockNextMapClickRef = useRef(false);
   const blockClickOnce = useCallback(() => {
@@ -784,8 +797,11 @@ export default function MapPage({ user, onDone }) {
           )}
         </div>
 
-        <div style={{ marginTop: 10, display: "grid", gap: 8 }}>
-          {(savedRoutes || []).map((r) => {
+        <div
+          className="saved-routes-scroll"
+          style={{ marginTop: 10, display: "grid", gap: 8 }}
+        >
+          {sortedSavedRoutes.map((r) => {
             const summary = getRouteDataSummary(r);
 
             return (
@@ -845,7 +861,7 @@ export default function MapPage({ user, onDone }) {
             );
           })}
 
-          {(!savedRoutes || savedRoutes.length === 0) && (
+          {(!sortedSavedRoutes || sortedSavedRoutes.length === 0) && (
             <div style={{ fontSize: 12, opacity: 0.7 }}>
               まだ保存がありません
             </div>

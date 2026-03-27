@@ -456,6 +456,12 @@
     border-radius: 22px;
   }
 
+  .saved-routes-scroll {
+    max-height: 220px;
+    overflow-y: auto;
+    padding-right: 4px;
+  }
+
   .hud-screen--nav {
     gap: 8px !important;
   }
