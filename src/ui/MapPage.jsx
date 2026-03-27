@@ -803,7 +803,7 @@ export default function MapPage({ user, onDone }) {
             marginTop: 10,
             display: "grid",
             gap: 8,
-            maxHeight: sortedSavedRoutes.length > 3 ? 140 : undefined,
+            maxHeight: sortedSavedRoutes.length > 3 ? 100 : undefined,
             overflowY: sortedSavedRoutes.length > 3 ? "auto" : "visible",
             WebkitOverflowScrolling:
               sortedSavedRoutes.length > 3 ? "touch" : undefined,
