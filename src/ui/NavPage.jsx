@@ -240,6 +240,8 @@ function ModeToggleControl({ mode, setMode, onBlockClickOnce }) {
 }
 
 function SimControlPanel({
+  visible,
+  onToggleVisible,
   simEnabled,
   setSimEnabled,
   simMode,
@@ -271,38 +273,74 @@ function SimControlPanel({
   godBaseTime,
   setGodBaseTime,
 }) {
+  if (!visible) {
+    return (
+      <div
+        style={{
+          position: "absolute",
+          left: 10,
+          top: 10,
+          zIndex: 999,
+          pointerEvents: "auto",
+        }}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        }}
+      >
+        <button
+          onClick={onToggleVisible}
+          style={{
+            minHeight: 34,
+            padding: "6px 10px",
+            borderRadius: 999,
+            fontSize: 12,
+            fontWeight: 800,
+            background: "rgba(255,255,255,0.94)",
+          }}
+        >
+          シミュ
+        </button>
+      </div>
+    );
+  }
+
   return (
     <div
       style={{
         position: "absolute",
-        left: 12,
-        top: 12,
+        left: 10,
+        top: 10,
         zIndex: 999,
         pointerEvents: "auto",
         background: "rgba(255,255,255,0.95)",
         border: "1px solid #ddd",
-        borderRadius: 12,
-        padding: "10px 10px",
+        borderRadius: 10,
+        padding: "8px 8px",
         boxShadow: "0 2px 8px rgba(0,0,0,0.10)",
-        minWidth: 320,
-        maxWidth: 380,
+        minWidth: 210,
+        width: "min(220px, calc(100vw - 24px))",
+        maxWidth: 220,
+        maxHeight: "34vh",
+        overflowY: "auto",
       }}
       onClick={(e) => {
         e.preventDefault();
         e.stopPropagation();
       }}
     >
-      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-        <b>GPS手動</b>
+      <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+        <b style={{ fontSize: 12 }}>GPS手動</b>
 
         <button
           onClick={() => setSimEnabled((v) => !v)}
           style={{
-            padding: "6px 10px",
+            padding: "4px 8px",
             borderRadius: 10,
             border: "1px solid #ccc",
             background: simEnabled ? "#fff4d6" : "white",
             cursor: "pointer",
+            fontSize: 11,
           }}
           title="ONにすると実GPSの代わりにシミュレーション位置を使います"
         >
@@ -313,7 +351,7 @@ function SimControlPanel({
           onClick={() => setSimPaused((v) => !v)}
           disabled={!simEnabled || simMode !== "auto"}
           style={{
-            padding: "6px 10px",
+            padding: "4px 8px",
             borderRadius: 10,
             border: "1px solid #ccc",
             background:
@@ -324,6 +362,7 @@ function SimControlPanel({
                 : "white",
             cursor:
               simEnabled && simMode === "auto" ? "pointer" : "not-allowed",
+            fontSize: 11,
           }}
         >
           {simPaused ? "再開" : "停止"}
@@ -332,13 +371,28 @@ function SimControlPanel({
         <div style={{ flex: 1 }} />
 
         <button
-          onClick={onResetToOrigin}
+          onClick={onToggleVisible}
           style={{
-            padding: "6px 10px",
+            padding: "4px 8px",
             borderRadius: 10,
             border: "1px solid #ccc",
             background: "white",
             cursor: "pointer",
+            fontSize: 11,
+          }}
+        >
+          閉じる
+        </button>
+
+        <button
+          onClick={onResetToOrigin}
+          style={{
+            padding: "4px 8px",
+            borderRadius: 10,
+            border: "1px solid #ccc",
+            background: "white",
+            cursor: "pointer",
+            fontSize: 11,
           }}
           disabled={!simEnabled}
         >
@@ -346,7 +400,7 @@ function SimControlPanel({
         </button>
       </div>
 
-      <div style={{ display: "flex", gap: 8, marginTop: 10, flexWrap: "wrap" }}>
+      <div style={{ display: "flex", gap: 6, marginTop: 8, flexWrap: "wrap" }}>
         <button
           onClick={() => {
             setSimMode("drag");
@@ -354,11 +408,12 @@ function SimControlPanel({
           }}
           disabled={!simEnabled}
           style={{
-            padding: "6px 10px",
+            padding: "4px 8px",
             borderRadius: 10,
             border: "1px solid #ccc",
             background: simEnabled && simMode === "drag" ? "#eef6ff" : "white",
             cursor: simEnabled ? "pointer" : "not-allowed",
+            fontSize: 11,
           }}
         >
           ドラッグ
@@ -371,17 +426,18 @@ function SimControlPanel({
           }}
           disabled={!simEnabled}
           style={{
-            padding: "6px 10px",
+            padding: "4px 8px",
             borderRadius: 10,
             border: "1px solid #ccc",
             background: simEnabled && simMode === "auto" ? "#eef6ff" : "white",
             cursor: simEnabled ? "pointer" : "not-allowed",
+            fontSize: 11,
           }}
         >
           ルート自走
         </button>
 
-        <label style={{ fontSize: 12, color: "#333", marginLeft: "auto" }}>
+        <label style={{ fontSize: 11, color: "#333", marginLeft: "auto" }}>
           速度(km/h)
           <input
             type="number"
@@ -392,11 +448,12 @@ function SimControlPanel({
             disabled={!simEnabled || simMode !== "auto"}
             onChange={(e) => setSpeedKmh(Number(e.target.value || 0))}
             style={{
-              width: 80,
-              marginLeft: 8,
-              padding: "6px 8px",
+              width: 60,
+              marginLeft: 6,
+              padding: "4px 6px",
               borderRadius: 10,
               border: "1px solid #ccc",
+              fontSize: 11,
             }}
           />
         </label>
@@ -404,35 +461,35 @@ function SimControlPanel({
 
       <div
         style={{
-          marginTop: 10,
+          marginTop: 8,
           borderTop: "1px solid #eee",
-          paddingTop: 10,
+          paddingTop: 8,
           display: "grid",
-          gap: 8,
+          gap: 6,
         }}
       >
-        <div style={{ fontWeight: 700, fontSize: 13 }}>
+        <div style={{ fontWeight: 700, fontSize: 12 }}>
           シミュレーション時刻
         </div>
 
-        <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
-          <label style={{ fontSize: 12 }}>
+        <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+          <label style={{ fontSize: 11 }}>
             日付
             <input
               type="date"
               value={simDate}
               onChange={(e) => setSimDate(e.target.value)}
-              style={{ marginLeft: 8, padding: 6 }}
+              style={{ marginLeft: 6, padding: 4, fontSize: 11 }}
             />
           </label>
 
-          <label style={{ fontSize: 12 }}>
+          <label style={{ fontSize: 11 }}>
             ±秒
             <input
               type="number"
               value={randomRangeSec}
               onChange={(e) => setRandomRangeSec(Number(e.target.value || 0))}
-              style={{ width: 90, marginLeft: 8, padding: 6 }}
+              style={{ width: 64, marginLeft: 6, padding: 4, fontSize: 11 }}
             />
           </label>
 
@@ -440,42 +497,44 @@ function SimControlPanel({
             onClick={onReseedSimClock}
             disabled={!simEnabled}
             style={{
-              padding: "6px 10px",
+              padding: "4px 8px",
               borderRadius: 10,
               border: "1px solid #ccc",
               background: "white",
               cursor: simEnabled ? "pointer" : "not-allowed",
+              fontSize: 11,
             }}
           >
             時刻再抽選
           </button>
         </div>
 
-        <div style={{ fontSize: 12, color: "#666" }}>
+        <div style={{ fontSize: 11, color: "#666" }}>
           現在のシミュ時刻: <b>{formatDateTimeLocal(simNowMs)}</b>
         </div>
       </div>
 
       <div
         style={{
-          marginTop: 10,
+          marginTop: 8,
           borderTop: "1px solid #eee",
-          paddingTop: 10,
+          paddingTop: 8,
           display: "grid",
-          gap: 8,
+          gap: 6,
         }}
       >
-        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <b style={{ fontSize: 13 }}>神信号</b>
+        <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+          <b style={{ fontSize: 12 }}>神信号</b>
 
           <button
             onClick={() => setGodEnabled((v) => !v)}
             style={{
-              padding: "6px 10px",
+              padding: "4px 8px",
               borderRadius: 10,
               border: "1px solid #ccc",
               background: godEnabled ? "#fff4d6" : "white",
               cursor: "pointer",
+              fontSize: 11,
             }}
           >
             {godEnabled ? "ON" : "OFF"}
@@ -493,7 +552,7 @@ function SimControlPanel({
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              fontSize: 14,
+              fontSize: 12,
               fontWeight: 800,
               color:
                 godEnabled && godState
@@ -508,35 +567,35 @@ function SimControlPanel({
         </div>
 
         <div
-          style={{ display: "grid", gap: 8, gridTemplateColumns: "1fr 1fr" }}
+          style={{ display: "grid", gap: 6, gridTemplateColumns: "1fr 1fr" }}
         >
-          <label style={{ fontSize: 12 }}>
+          <label style={{ fontSize: 11 }}>
             T
             <input
               type="number"
               value={godT}
               onChange={(e) => setGodT(Number(e.target.value || 0))}
-              style={{ width: "100%", marginTop: 4, padding: 6 }}
+              style={{ width: "100%", marginTop: 4, padding: 4, fontSize: 11 }}
             />
           </label>
 
-          <label style={{ fontSize: 12 }}>
+          <label style={{ fontSize: 11 }}>
             G
             <input
               type="number"
               value={godG}
               onChange={(e) => setGodG(Number(e.target.value || 0))}
-              style={{ width: "100%", marginTop: 4, padding: 6 }}
+              style={{ width: "100%", marginTop: 4, padding: 4, fontSize: 11 }}
             />
           </label>
 
-          <label style={{ fontSize: 12 }}>
+          <label style={{ fontSize: 11 }}>
             β1 (sec/day)
             <input
               type="number"
               value={godBeta1}
               onChange={(e) => setGodBeta1(Number(e.target.value || 0))}
-              style={{ width: "100%", marginTop: 4, padding: 6 }}
+              style={{ width: "100%", marginTop: 4, padding: 4, fontSize: 11 }}
             />
           </label>
 
@@ -544,31 +603,31 @@ function SimControlPanel({
         </div>
 
         <div
-          style={{ display: "grid", gap: 8, gridTemplateColumns: "1fr 1fr" }}
+          style={{ display: "grid", gap: 6, gridTemplateColumns: "1fr 1fr" }}
         >
-          <label style={{ fontSize: 12 }}>
+          <label style={{ fontSize: 11 }}>
             β0基準日
             <input
               type="date"
               value={godBaseDate}
               onChange={(e) => setGodBaseDate(e.target.value)}
-              style={{ width: "100%", marginTop: 4, padding: 6 }}
+              style={{ width: "100%", marginTop: 4, padding: 4, fontSize: 11 }}
             />
           </label>
 
-          <label style={{ fontSize: 12 }}>
+          <label style={{ fontSize: 11 }}>
             β0基準時刻
             <input
               type="time"
               value={godBaseTime}
               onChange={(e) => setGodBaseTime(e.target.value)}
-              style={{ width: "100%", marginTop: 4, padding: 6 }}
+              style={{ width: "100%", marginTop: 4, padding: 4, fontSize: 11 }}
             />
           </label>
         </div>
       </div>
 
-      <div style={{ marginTop: 8, fontSize: 12, color: "#666" }}>
+      <div style={{ marginTop: 6, fontSize: 11, color: "#666" }}>
         {simEnabled
           ? simMode === "drag"
             ? "※ GPSマーカーをドラッグして位置を動かせます"
@@ -604,6 +663,7 @@ export default function NavPage({ user, routeId }) {
   const [godBeta1, setGodBeta1] = useState(20);
   const [godBaseDate, setGodBaseDate] = useState(todayLocalDateStr());
   const [godBaseTime, setGodBaseTime] = useState("09:00");
+  const [showSimPanel, setShowSimPanel] = useState(false);
 
   const [followGPS, setFollowGPS] = useState(true);
   const [showRecenterBtn, setShowRecenterBtn] = useState(false);
@@ -1403,6 +1463,8 @@ export default function NavPage({ user, routeId }) {
             />
 
             <SimControlPanel
+              visible={showSimPanel}
+              onToggleVisible={() => setShowSimPanel((prev) => !prev)}
               simEnabled={simEnabled}
               setSimEnabled={setSimEnabled}
               simMode={simMode}
