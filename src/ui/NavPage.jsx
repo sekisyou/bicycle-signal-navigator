@@ -1373,10 +1373,12 @@ export default function NavPage({ user, routeId }) {
     <div
       className="hud-screen"
       style={{
-        height: "calc(100vh - 20px)",
+        height: "100%",
+        minHeight: 0,
         display: "flex",
         flexDirection: "column",
         gap: 10,
+        overflow: "hidden",
       }}
     >
       {(loading || showAssistSpeedSlot) && (
@@ -1385,11 +1387,12 @@ export default function NavPage({ user, routeId }) {
           style={{
             border: "none",
             borderRadius: 10,
-            padding: 12,
+            padding: 8,
             display: "flex",
-            gap: 10,
+            gap: 8,
             alignItems: "center",
             flexWrap: "wrap",
+            flex: "0 0 auto",
           }}
         >
           {loading && (
@@ -1446,6 +1449,7 @@ export default function NavPage({ user, routeId }) {
           className="hud-map-frame"
           style={{
             flex: 1,
+            minHeight: 0,
             border: "none",
             borderRadius: 10,
             overflow: "hidden",
