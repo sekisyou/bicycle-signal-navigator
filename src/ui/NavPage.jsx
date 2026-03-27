@@ -1373,8 +1373,8 @@ export default function NavPage({ user, routeId }) {
     <div
       className="hud-screen"
       style={{
-        height: "100%",
-        minHeight: 0,
+        height: "calc(100dvh - 88px)",
+        minHeight: "calc(100vh - 88px)",
         display: "flex",
         flexDirection: "column",
         gap: 10,
