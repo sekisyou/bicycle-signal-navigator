@@ -505,7 +505,7 @@ function SegmentText({
           y={p.y + 14}
           textAnchor="middle"
           fill="white"
-          style={{ fontSize: 50 * fontScale, fontWeight: 900 }}
+          style={{ fontSize: 100 * fontScale, fontWeight: 900 }}
         >
           {fmt1(speed)}
         </text>
