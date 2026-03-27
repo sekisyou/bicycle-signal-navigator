@@ -451,7 +451,7 @@ export default function SignalPanel({
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "140px 1fr 140px",
+          gridTemplateColumns: "112px 1fr 112px",
           alignItems: "center",
           gap: 14,
         }}
@@ -463,31 +463,25 @@ export default function SignalPanel({
             justifyContent: "center",
           }}
         >
-          <div
+          <button
+            onClick={onToggleTrafficMode}
             style={{
-              width: "100%",
+              minWidth: 74,
+              padding: "10px 12px",
+              borderRadius: 14,
+              border: "1px solid rgba(93, 124, 128, 0.18)",
+              background: trafficMode
+                ? "linear-gradient(180deg, #edf7ff, #d8efff)"
+                : "linear-gradient(180deg, #fff7dc, #ffe8a3)",
+              cursor: "pointer",
+              fontWeight: 700,
+              whiteSpace: "nowrap",
+              boxShadow: "0 18px 34px rgba(13, 40, 50, 0.08)",
+              backdropFilter: "blur(12px)",
             }}
           >
-            <button
-              onClick={onToggleTrafficMode}
-              style={{
-                padding: "10px 12px",
-                borderRadius: 14,
-                border: "1px solid rgba(93, 124, 128, 0.18)",
-                background: trafficMode
-                  ? "linear-gradient(180deg, #edf7ff, #d8efff)"
-                  : "linear-gradient(180deg, #fff7dc, #ffe8a3)",
-                cursor: "pointer",
-                fontWeight: 700,
-                whiteSpace: "nowrap",
-                boxShadow: "0 18px 34px rgba(13, 40, 50, 0.08)",
-                backdropFilter: "blur(12px)",
-                width: "100%",
-              }}
-            >
-              {trafficMode ? "渋滞" : "通常"}
-            </button>
-          </div>
+            {trafficMode ? "渋滞" : "通常"}
+          </button>
         </div>
 
         {/* 中央：信号情報 */}
@@ -544,7 +538,7 @@ export default function SignalPanel({
               whiteSpace: "nowrap",
               boxShadow: "0 18px 34px rgba(13, 40, 50, 0.08)",
               backdropFilter: "blur(12px)",
-              width: "100%",
+              minWidth: 88,
             }}
           >
             キャンセル
