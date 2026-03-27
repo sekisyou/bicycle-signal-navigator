@@ -734,6 +734,11 @@ export default function NavSignalMode({
     }, 0);
   };
 
+  const handleSkipSignal = () => {
+    console.log("SIGNALMODE_SKIPPED");
+    finishSignalMode("signalmode-skipped");
+  };
+
   const canRender = !!(
     targetSignal &&
     approachRoute &&
@@ -824,7 +829,7 @@ export default function NavSignalMode({
         blueEnabled={blueEnabled}
         onRed={handleManualRed}
         onBlue={handleManualBlue}
-        onCancel={() => onCancelSignalMode?.("manual-cancel")}
+        onCancel={handleSkipSignal}
         disabledReason={disabledReason}
       />
 
