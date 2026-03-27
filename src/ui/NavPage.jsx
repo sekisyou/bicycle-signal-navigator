@@ -191,11 +191,6 @@ function ModeToggleControl({ mode, setMode, onBlockClickOnce }) {
     >
       <div
         style={{
-          background: "rgba(255,255,255,0.96)",
-          border: "1px solid #ddd",
-          borderRadius: 12,
-          padding: 10,
-          boxShadow: "0 2px 8px rgba(0,0,0,0.12)",
           minWidth: 132,
         }}
       >
@@ -218,6 +213,7 @@ function ModeToggleControl({ mode, setMode, onBlockClickOnce }) {
             cursor: "pointer",
             fontWeight: 700,
             whiteSpace: "nowrap",
+            boxShadow: "0 2px 8px rgba(0,0,0,0.12)",
           }}
         >
           {isNormal ? "通常" : "渋滞"}

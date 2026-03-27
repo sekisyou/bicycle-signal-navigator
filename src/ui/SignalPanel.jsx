@@ -465,13 +465,7 @@ export default function SignalPanel({
         >
           <div
             style={{
-              background: "rgba(255,255,255,0.74)",
-              border: "1px solid rgba(104, 132, 144, 0.18)",
-              borderRadius: 18,
-              padding: 10,
-              boxShadow: "0 18px 34px rgba(13, 40, 50, 0.08)",
               minWidth: 150,
-              backdropFilter: "blur(12px)",
             }}
           >
             <button
@@ -486,6 +480,8 @@ export default function SignalPanel({
                 cursor: "pointer",
                 fontWeight: 700,
                 whiteSpace: "nowrap",
+                boxShadow: "0 18px 34px rgba(13, 40, 50, 0.08)",
+                backdropFilter: "blur(12px)",
               }}
             >
               {trafficMode ? "渋滞" : "通常"}
