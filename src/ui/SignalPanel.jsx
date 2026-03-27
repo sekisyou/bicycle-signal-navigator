@@ -451,7 +451,7 @@ export default function SignalPanel({
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "112px 1fr 112px",
+          gridTemplateColumns: "2.8fr 3.6fr 2.8fr",
           alignItems: "center",
           gap: 14,
         }}
@@ -527,13 +527,13 @@ export default function SignalPanel({
           <button
             onClick={onCancel}
             style={{
-              padding: "10px 16px",
+              padding: "10px 14px",
               borderRadius: 16,
               border: "1px solid rgba(104, 132, 144, 0.18)",
               background: "rgba(255,255,255,0.78)",
               color: "#24404c",
               cursor: "pointer",
-              fontSize: 14,
+              fontSize: 12,
               fontWeight: 700,
               whiteSpace: "nowrap",
               boxShadow: "0 18px 34px rgba(13, 40, 50, 0.08)",
