@@ -470,23 +470,10 @@ export default function SignalPanel({
               borderRadius: 18,
               padding: 10,
               boxShadow: "0 18px 34px rgba(13, 40, 50, 0.08)",
-              display: "grid",
-              gap: 6,
               minWidth: 150,
               backdropFilter: "blur(12px)",
             }}
           >
-            <div
-              style={{
-                fontSize: 11,
-                color: "#58717d",
-                textAlign: "center",
-                fontWeight: 800,
-              }}
-            >
-              現在: {trafficMode ? "渋滞" : "通常"}
-            </div>
-
             <button
               onClick={onToggleTrafficMode}
               style={{
@@ -501,7 +488,7 @@ export default function SignalPanel({
                 whiteSpace: "nowrap",
               }}
             >
-              {trafficMode ? "通常モードへ" : "渋滞モードへ"}
+              {trafficMode ? "渋滞" : "通常"}
             </button>
           </div>
         </div>

@@ -196,21 +196,9 @@ function ModeToggleControl({ mode, setMode, onBlockClickOnce }) {
           borderRadius: 12,
           padding: 10,
           boxShadow: "0 2px 8px rgba(0,0,0,0.12)",
-          display: "grid",
-          gap: 6,
           minWidth: 132,
         }}
       >
-        <div
-          style={{
-            fontSize: 12,
-            color: "#666",
-            textAlign: "center",
-          }}
-        >
-          現在: {isNormal ? "通常" : "渋滞"}
-        </div>
-
         <button
           onMouseDown={(ev) => {
             ev.preventDefault();
@@ -232,7 +220,7 @@ function ModeToggleControl({ mode, setMode, onBlockClickOnce }) {
             whiteSpace: "nowrap",
           }}
         >
-          {isNormal ? "渋滞モードへ" : "通常モードへ"}
+          {isNormal ? "通常" : "渋滞"}
         </button>
       </div>
     </div>
