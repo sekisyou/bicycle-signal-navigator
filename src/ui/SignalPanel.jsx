@@ -494,13 +494,10 @@ export default function SignalPanel({
           style={{
             display: "grid",
             justifyItems: "center",
-            gap: 4,
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
-          <div style={{ fontSize: 12, color: "#58717d", letterSpacing: "0.08em" }}>
-            現在速度
-          </div>
-
           <div
             style={{
               fontSize: 52,
@@ -508,19 +505,10 @@ export default function SignalPanel({
               lineHeight: 1,
               color: "#10232d",
               letterSpacing: "-0.05em",
+              textAlign: "center",
             }}
           >
             {speedText}
-            <span
-              style={{
-                fontSize: 18,
-                fontWeight: 700,
-                marginLeft: 6,
-                color: "#47626d",
-              }}
-            >
-              km/h
-            </span>
           </div>
         </div>
 
