@@ -865,7 +865,7 @@ export default function AssistSpeedSlot({
                 padRy: 14,
                 startFrac: 0.62,
                 endFrac: 0.9,
-                topY: -30,
+                topY: -36,
               });
 
               return (
@@ -886,12 +886,12 @@ export default function AssistSpeedSlot({
                   />
                   <text
                     x={870}
-                    y={35}
+                    y={20}
                     textAnchor="middle"
                     dominantBaseline="middle"
                     fill="#111"
                     style={{
-                      fontSize: 19,
+                      fontSize: 28.5,
                       fontWeight: 800,
                       cursor: "pointer",
                       pointerEvents: "auto",
