@@ -455,4 +455,21 @@
   .hud-map-frame {
     border-radius: 22px;
   }
+
+  .hud-screen--nav {
+    gap: 8px !important;
+  }
+
+  .nav-route-summary {
+    flex: 0 0 28dvh !important;
+    min-height: 28dvh !important;
+    max-height: 28dvh !important;
+    overflow: hidden;
+  }
+
+  .nav-route-map {
+    flex: 0 0 48dvh !important;
+    min-height: 48dvh !important;
+    max-height: 48dvh !important;
+  }
 }

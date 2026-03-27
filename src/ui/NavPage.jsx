@@ -1371,7 +1371,7 @@ export default function NavPage({ user, routeId }) {
 
   return (
     <div
-      className="hud-screen"
+      className="hud-screen hud-screen--nav"
       style={{
         height: "calc(100dvh - 88px)",
         minHeight: "calc(100vh - 88px)",
@@ -1383,7 +1383,7 @@ export default function NavPage({ user, routeId }) {
     >
       {(loading || showAssistSpeedSlot) && (
         <div
-          className="hud-card hud-card--compact"
+          className="hud-card hud-card--compact nav-route-summary"
           style={{
             border: "none",
             borderRadius: 10,
@@ -1446,7 +1446,7 @@ export default function NavPage({ user, routeId }) {
         />
       ) : (
         <div
-          className="hud-map-frame"
+          className="hud-map-frame nav-route-map"
           style={{
             flex: 1,
             minHeight: 0,
