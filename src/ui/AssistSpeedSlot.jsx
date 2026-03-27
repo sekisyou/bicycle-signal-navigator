@@ -865,7 +865,7 @@ export default function AssistSpeedSlot({
                 padRy: 14,
                 startFrac: 0.62,
                 endFrac: 0.9,
-                topY: 8,
+                topY: -4,
               });
 
               return (
